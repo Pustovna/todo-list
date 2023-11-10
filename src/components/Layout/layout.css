@@ -1,4 +1,7 @@
 .container {
     display: flex;
     padding-right: 13px;
+    padding-left: 13px;
+    max-width: 1200px;
+    margin: auto;
 }

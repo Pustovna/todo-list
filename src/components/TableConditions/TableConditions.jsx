@@ -1,4 +1,5 @@
 import CalendarBoard from "../CalendarBoard/CalendarBoard";
+import "./table.css";
 
 import { useState } from 'react';
 
@@ -10,16 +11,16 @@ const TableConditions = () => {
     };
 
     return (
-        <div>
+        <div className="table-container">
             <div>
-                <button>Сегодня</button>
+                <button class="table-button">Сегодня</button>
             </div>
             <div>
-                <button>На неделю</button>
+                <button class="table-button">На неделю</button>
             </div>
             
             <CalendarBoard />
-            <div>
+            <div className="table-check">
                 <label>
                     <input
                         type="checkbox"

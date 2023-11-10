@@ -7,6 +7,7 @@
     align-items: flex-end;
     background-color: var(--task-background);
     padding: 5px 8px;
+    margin: 13px 0 0 0;
 }
 
 .task {

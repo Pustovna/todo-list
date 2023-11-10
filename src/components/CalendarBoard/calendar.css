@@ -6,5 +6,32 @@
   width: 100%;
   margin-top: 20px;
   background-color: white;
-  max-width: 200px;
+  max-width: 250px;
+  font-size: 12px;
+}
+
+
+.react-calendar__tile {
+  background-color: transparent;
+  border-color: rgba(124, 122, 122, 0.116);
+  cursor: pointer;
+}
+.react-calendar__month-view__weekdays {
+  text-align: center;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 8px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.react-calendar__navigation {
+  margin-bottom: 10px;
+  margin-top: 10px;
+  border: none;
+  background-color: transparent;
+  font-size: 12px;
+  font-weight: bold;
+  color: #4f4f4f;
+  text-transform: uppercase;
 }

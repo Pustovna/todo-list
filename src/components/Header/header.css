@@ -5,4 +5,6 @@
     padding: 7px 16px 9px;
     display: flex;
     justify-content: space-between;
+    max-width: 1200px;
+    margin: auto;
 }

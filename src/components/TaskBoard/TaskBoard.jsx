@@ -7,6 +7,11 @@ const TaskBoard = () => {
         <div className="task-board">
             <div class="task-list">
             <Task></Task>
+            <Task></Task>
+            <Task></Task>
+
+            <Task></Task>
+            <Task></Task>
             </div>
         </div>
         
