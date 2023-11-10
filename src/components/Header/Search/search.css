@@ -1,0 +1,36 @@
+@import "../../../styles/common.css";
+
+
+.search-container {
+    display: flex;
+    padding: 10px;
+    background-color: var(--header-button);
+}
+
+.search-button {
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    transition: all 0.1s ease;
+    margin-right: 9px;
+}
+
+.search-button:hover {
+    transform: scale(1.1);
+}
+
+.search-input {
+    background: transparent;
+    border: none;
+    max-width: 100%;
+    color: #DDDDDD;
+    font-size: 18px;
+}
+
+.search-input:active, .search-input:focus {
+    outline: none;
+}
+
+.search-input::placeholder {
+    color: #DDDDDD;
+}

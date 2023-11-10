@@ -1,0 +1,8 @@
+@import '../../styles/common';
+
+.header-container {
+    background-color: var(--header-background);
+    padding: 7px 16px 9px;
+    display: flex;
+    justify-content: space-between;
+}
