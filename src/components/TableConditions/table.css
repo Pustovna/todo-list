@@ -11,7 +11,7 @@
     font-size: 18px;
     text-align: center;
     padding: 5px 8px;
-    margin: 13px 0 0 0;
+    margin: 13px 0 13px 0;
     background-color: #C4C4C4;
     border: none;
     display: flex;
@@ -23,4 +23,7 @@
 .table-check {
     font-size: 10px;
     margin-top: 23px;
+}
+.table-check label {
+    margin-left: 5px;
 }

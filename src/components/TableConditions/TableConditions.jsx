@@ -7,9 +7,12 @@ import useFetch from "../../hooks/hooks";
 
 const TableConditions = () => {
   const [isChecked, setIsChecked] = useState(false);
+  const notResolvedTasks = useTasksStore((state) => state.showNotResolved);
+  const changeResolve = useTasksStore((state) => state.changeShowResolve);
 
   const handleCheckboxChange = () => {
     setIsChecked(!isChecked);
+    changeResolve(!notResolvedTasks);
   };
 
   const todayFromStart = new Date();
@@ -20,9 +23,6 @@ const TableConditions = () => {
   startDate.setHours(0, 0, 0, 0);
   endDate.setHours(0, 0, 0, 0);
 
-  //   const dataToday = useFetch(
-  //     `http://localhost:3000/doczilla/date?from=${startDate.getTime()}&to=${today.getTime()}`
-  //   );
   const tasks = useTasksStore((state) => state.tasks);
   const addTasks = useTasksStore((state) => state.addTask);
 
@@ -42,19 +42,18 @@ const TableConditions = () => {
   const handleWeekClick = async () => {
     const daysSinceMonday = (today.getDay() + 6) % 7;
     const startOfWeek = today.getTime() - daysSinceMonday * 24 * 60 * 60 * 1000;
-    
-    fetch(
-        `http://localhost:3000/doczilla/date?from=${startOfWeek}&to=${today.getTime()}`
-      )
-        .then((response) => response.json())
-        .then((data) => {
-          addTasks(data);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
 
-  }
+    fetch(
+      `http://localhost:3000/doczilla/date?from=${startOfWeek}&to=${today.getTime()}`
+    )
+      .then((response) => response.json())
+      .then((data) => {
+        addTasks(data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
   return (
     <div className="table-container">
@@ -64,19 +63,19 @@ const TableConditions = () => {
         </button>
       </div>
       <div>
-        <button onClick={handleWeekClick} className="table-button">На неделю</button>
+        <button onClick={handleWeekClick} className="table-button">
+          На неделю
+        </button>
       </div>
 
       <CalendarBoard />
       <div className="table-check">
-        <label>
-          <input
-            type="checkbox"
-            checked={isChecked}
-            onChange={handleCheckboxChange}
-          />
-          Только невыполненные
-        </label>
+        <input
+          type="checkbox"
+          checked={isChecked}
+          onChange={handleCheckboxChange}
+        />
+        <label>Только невыполненные</label>
       </div>
     </div>
   );
