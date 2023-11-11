@@ -1,36 +1,84 @@
 import CalendarBoard from "../CalendarBoard/CalendarBoard";
 import "./table.css";
 
-import { useState } from 'react';
+import { useState } from "react";
+import useTasksStore from "../../store/tasks";
+import useFetch from "../../hooks/hooks";
 
 const TableConditions = () => {
-    const [isChecked, setIsChecked] = useState(false);
+  const [isChecked, setIsChecked] = useState(false);
 
-    const handleCheckboxChange = () => {
-        setIsChecked(!isChecked);
-    };
+  const handleCheckboxChange = () => {
+    setIsChecked(!isChecked);
+  };
 
-    return (
-        <div className="table-container">
-            <div>
-                <button class="table-button">Сегодня</button>
-            </div>
-            <div>
-                <button class="table-button">На неделю</button>
-            </div>
-            
-            <CalendarBoard />
-            <div className="table-check">
-                <label>
-                    <input
-                        type="checkbox"
-                        checked={isChecked}
-                        onChange={handleCheckboxChange}
-                    />
-                   Только невыполненные
-                </label>
-            </div>
-        </div>
-    );
+  const todayFromStart = new Date();
+  const today = new Date();
+  const startDate = new Date("2021-11-22");
+  const endDate = new Date();
+  todayFromStart.setHours(0, 0, 0, 0);
+  startDate.setHours(0, 0, 0, 0);
+  endDate.setHours(0, 0, 0, 0);
+
+  //   const dataToday = useFetch(
+  //     `http://localhost:3000/doczilla/date?from=${startDate.getTime()}&to=${today.getTime()}`
+  //   );
+  const tasks = useTasksStore((state) => state.tasks);
+  const addTasks = useTasksStore((state) => state.addTask);
+
+  const handleTodayClick = async () => {
+    fetch(
+      `http://localhost:3000/doczilla/date?from=${todayFromStart.getTime()}&to=${today.getTime()}`
+    )
+      .then((response) => response.json())
+      .then((data) => {
+        addTasks(data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  const handleWeekClick = async () => {
+    const daysSinceMonday = (today.getDay() + 6) % 7;
+    const startOfWeek = today.getTime() - daysSinceMonday * 24 * 60 * 60 * 1000;
+    
+    fetch(
+        `http://localhost:3000/doczilla/date?from=${startOfWeek}&to=${today.getTime()}`
+      )
+        .then((response) => response.json())
+        .then((data) => {
+          addTasks(data);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+
+  }
+
+  return (
+    <div className="table-container">
+      <div>
+        <button onClick={handleTodayClick} className="table-button">
+          Сегодня
+        </button>
+      </div>
+      <div>
+        <button onClick={handleWeekClick} className="table-button">На неделю</button>
+      </div>
+
+      <CalendarBoard />
+      <div className="table-check">
+        <label>
+          <input
+            type="checkbox"
+            checked={isChecked}
+            onChange={handleCheckboxChange}
+          />
+          Только невыполненные
+        </label>
+      </div>
+    </div>
+  );
 };
 export default TableConditions;

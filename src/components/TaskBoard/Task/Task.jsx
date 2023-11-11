@@ -1,34 +1,37 @@
 import { useState } from "react";
 import "./task.css";
 
-const Task = () => {
+const Task = ({id, name, shortDesk, date}) => {
   const [isChecked, setIsChecked] = useState(false);
 
   const handleCheckboxChange = () => {
     setIsChecked(!isChecked);
   };
 
+  const newDate = new Date(date);
+  const dateStr = `${newDate.getDate()}.${newDate.getMonth() + 1}.${newDate.getFullYear()}`;
+
   return (
-    <div class="task-container">
+    <div className="task-container">
       
-      <div className="task">
+      <div className="task" id={id}>
       <div>
-        <h1>Task</h1>
-        <p>Описание</p>
+        <h1>{name}</h1>
+        <p>{shortDesk}</p>
       </div>
         <div>
           <input
-          id="checkbox"
+          id={id}
           className="checkbox"
             type="checkbox"
             checked={isChecked}
             onChange={handleCheckboxChange}
           />
-           <label htmlFor="checkbox"></label>
+           <label onClick={handleCheckboxChange} htmlFor={id}></label>
         </div>
         
       </div>
-      <span>08.05.2022 00:05</span>
+      <span>{dateStr}</span>
     </div>
   );
 };

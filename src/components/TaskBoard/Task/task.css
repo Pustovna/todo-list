@@ -23,7 +23,6 @@
 }
 .checkbox+label {
     display: inline-flex;
-    user-select: none;
 }
 .checkbox+label::before {
     content: '';
@@ -37,6 +36,7 @@
     background-repeat: no-repeat;
     background-position: center center;
     background-size: 50% 50%;
+    cursor: pointer;
     
 
 }
