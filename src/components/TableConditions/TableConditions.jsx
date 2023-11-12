@@ -1,9 +1,8 @@
 import CalendarBoard from "../CalendarBoard/CalendarBoard";
 import "./table.css";
-
 import { useState } from "react";
 import useTasksStore from "../../store/tasks";
-import useFetch from "../../hooks/hooks";
+import { serverPath } from "../../serverPath";
 
 const TableConditions = () => {
   const [isChecked, setIsChecked] = useState(false);
@@ -28,7 +27,7 @@ const TableConditions = () => {
 
   const handleTodayClick = async () => {
     fetch(
-      `http://localhost:3000/doczilla/date?from=${todayFromStart.getTime()}&to=${today.getTime()}`
+      `${serverPath}/doczilla/date?from=${todayFromStart.getTime()}&to=${today.getTime()}`
     )
       .then((response) => response.json())
       .then((data) => {
@@ -44,7 +43,7 @@ const TableConditions = () => {
     const startOfWeek = today.getTime() - daysSinceMonday * 24 * 60 * 60 * 1000;
 
     fetch(
-      `http://localhost:3000/doczilla/date?from=${startOfWeek}&to=${today.getTime()}`
+      `${serverPath}/doczilla/date?from=${startOfWeek}&to=${today.getTime()}`
     )
       .then((response) => response.json())
       .then((data) => {

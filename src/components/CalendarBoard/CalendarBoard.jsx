@@ -3,6 +3,7 @@ import "./calendar.css";
 import 'react-calendar/dist/Calendar.css';
 import { useEffect, useState } from "react";
 import useTasksStore from "../../store/tasks";
+import {serverPath} from "../../serverPath";
 
 
 const CalendarBoard = () => {
@@ -14,7 +15,7 @@ const CalendarBoard = () => {
   useEffect(() => {
     if (value.length === 2) {
       fetch(
-        `http://localhost:3000/doczilla/date?from=${value[0].getTime()}&to=${value[1].getTime()}`
+        `${serverPath}/doczilla/date?from=${value[0].getTime()}&to=${value[1].getTime()}`
       )
         .then((response) => response.json())
         .then((data) => {

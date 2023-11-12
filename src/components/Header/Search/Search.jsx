@@ -2,6 +2,7 @@ import icon from "../../../assest/search.svg";
 import "./search.css";
 import { useState, useEffect } from "react";
 import useTasksStore from "../../../store/tasks";
+import { serverPath } from "../../../serverPath";
 
 const Search = () => {
     const tasks = useTasksStore((state) => state.tasks);
@@ -16,7 +17,7 @@ const Search = () => {
         if (value.length > 0) {
             console.log(value);
             fetch(
-                `http://localhost:3000/doczilla/find?word=${value}`
+                `${serverPath}/doczilla/find?word=${value}`
             )
                 .then((response) => response.json())
                 .then((data) => {

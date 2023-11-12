@@ -6,11 +6,10 @@ import { useEffect } from "react";
 import icon from "../../assest/sort.svg";
 import { useState } from "react";
 import Modal from "../Modal/Modal";
+import { serverPath } from "../../serverPath";
 
 const TaskBoard = () => {
-  const data = useFetch(
-    "http://localhost:3000/doczilla/todos?limit=10&offset=1"
-  );
+  const data = useFetch(`${serverPath}/doczilla/todos?limit=10&offset=1`);
   const [sortType, setSortType] = useState("toMost");
   const tasks = useTasksStore((state) => state.tasks);
   const addTasks = useTasksStore((state) => state.addTask);
@@ -40,9 +39,7 @@ const TaskBoard = () => {
 
   return (
     <div className="task-board">
-      <Modal />
       <div className="sortButton">
-        <date>8 мая 2022</date>
         <button onClick={handleSort}>
           <img src={icon} alt="" />
           Сортировать по дате
@@ -61,6 +58,7 @@ const TaskBoard = () => {
                 shortDesk={task.shortDesc}
                 date={task.date}
                 status={task.status}
+                fullDesc={task.fullDesc}
               ></Task>
             );
           })}
@@ -75,11 +73,13 @@ const TaskBoard = () => {
                   shortDesk={task.shortDesc}
                   date={task.date}
                   status={task.status}
+                  fullDesc={task.fullDesc}
                 ></Task>
               );
             }
           })}
       </div>
+      <Modal />
     </div>
   );
 };
